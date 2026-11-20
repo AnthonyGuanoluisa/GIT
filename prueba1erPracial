@@ -1,0 +1,81 @@
+# CINE UTC - CONTROL DE VENTAS
+capacidad = 50
+adulto = 5
+ninio = 3
+tercera_edad = 2.50
+recaudacion = 0
+asientos = 0
+while True:
+    print("""
+        CINE UTC
+    SISTEMA DE ENTRADAS
+    1. Comprar entradas
+    2. Consultar asientos disponibles
+    3. Consultar entradas vendidas
+    4. Consultar recaudacion total
+    5. Salir
+    """)
+    opcion = int(input("Ingrese una opcion: "))
+    match opcion:
+        # VENTA DE BOLETOS
+        case 1:
+            if asientos >= capacidad:
+                print("No hay asientos disponibles")
+            else:
+                cantidad = int(input("Ingrese la cantidad de entradas: "))
+                if cantidad <= 0:
+                    print("Ingrese una cantidad valida")
+                elif cantidad > (capacidad - asientos):
+                    print("No hay suficientes asientos disponibles")
+                else:
+                    pago = 0
+                    for i in range(cantidad):
+                        print("""
+                        TIPOS DE PERSONAS
+                        1. Adulto - $5
+                        2. Ninio - $3
+                        3. Tercera edad - $2.50
+                        """)
+                        persona = int(input("Seleccione el tipo de persona: "))
+
+                        if persona == 1:
+                            pago += adulto
+                            recaudacion += adulto
+                            print("Adulto paga $5")
+
+                        elif persona == 2:
+                            pago += ninio
+                            recaudacion += ninio
+                            print("Ninio paga $3")
+
+                        elif persona == 3:
+                            pago += tercera_edad
+                            recaudacion += tercera_edad
+                            print("Tercera edad paga $2.50")
+                        else:
+                            print("Tipo de persona invalido")
+                            continue
+                        asientos += 1
+                    print("Total de su compra: $", pago)
+        # ASIENTOS DISPONIBLES
+        case 2:
+            disponibles = capacidad - asientos
+            print("Capacidad total:", capacidad)
+            print("Asientos ocupados:", asientos)
+            print("Asientos disponibles:", disponibles)
+        # ENTRADAS VENDIDAS
+        case 3:
+            print("Entradas vendidas:", asientos)
+        # RECAUDACION TOTAL
+        case 4:
+            if recaudacion == 0:
+                print("No se han vendido entradas")
+            else:
+                print("Recaudacion total: $", recaudacion)
+                print("Total de boletos vendidos:", asientos)
+        # SALIR
+        case 5:
+            print("Gracias por visitar el CINE UTC")
+            break
+        case _:
+            print("Opcion invalida")
